@@ -53,14 +53,12 @@ func main() {
 
 	if os.Getenv(markName) == markValue {
 		time.Sleep(diff)
-		fmt.Println("we are now printing...")
 		err = beeep.Alert("Reminder", strings.Join(os.Args[2:], " "), "")
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(4)
 		}
 	} else {
-		fmt.Println("we are in else")
 		cmd := exec.Command(os.Args[0], os.Args[1:]...)
 		cmd.Env = append(cmd.Env, fmt.Sprintf("%s=%s", markName, markValue))
 		if err = cmd.Start(); err != nil {
